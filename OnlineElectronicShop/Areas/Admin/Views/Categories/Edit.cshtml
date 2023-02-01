@@ -1,0 +1,46 @@
+﻿@model Category
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Category Table</h5>
+
+
+                        <form method="post" enctype="multipart/form-data">
+                            <input hidden asp-for="CatId" />
+                            <input hidden asp-for="CatImg" />
+                            <div class="row mb-3">
+                                <label for="inputText" class="col-sm-2 col-form-label">Category Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" asp-for="CatName" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" asp-for="CatImg" type="file" name="File">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Submit Category</button>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+
+</main><!-- End #main -->

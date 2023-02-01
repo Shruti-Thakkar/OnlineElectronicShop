@@ -1,0 +1,33 @@
+﻿@model List<Product>
+
+
+<div class="container" id="product-cards">
+    <h1 class="text-center">Category</h1>
+
+    <div class="row" style="margin-top: 30px;">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3 py-3 py-md-0">
+                <div class="card">
+                    <img src="~/ProductImage/@item.ProductImg" alt="">
+                    <div class="card-body">
+                        <h3 class="text-center">@item.ProductName</h3>
+                        <p class="text-center">@item.ProductDesc</p>
+                        <h2>
+                            $@item.ProductPrice <span>
+                                <li class="fa-solid fa-cart-shopping"></li>
+                            </span>
+                        </h2>
+                    </div>
+                </div>
+                <br />
+            </div>
+
+        }
+    </div>
+
+</div>
+
+
+
+

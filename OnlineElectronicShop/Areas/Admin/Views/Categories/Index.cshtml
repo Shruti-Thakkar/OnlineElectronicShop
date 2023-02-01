@@ -1,0 +1,55 @@
+﻿@model List<Category>
+<section class="content">
+    <div class="container-fluid ">
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Category Table</h3>
+            </div>
+            <div>
+
+                <a class="btn btn-primary" asp-controller="Categories" asp-action="Create" asp-area="Admin">
+                    Add Category
+                </a>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover">
+                    <thead>
+                                <tr>
+                             
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Images</th>
+                                    <th scope="col">Action</th>
+                                   
+                                </tr>
+                     </thead>
+
+                     <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.CatName</td>
+                                <td>
+                                <img src="~/CategoryImage/@item.CatImg" style="height:50px;width:50px"/>
+                                </td>
+                                <td>
+                                <a asp-action="Edit" asp-controller="Categories" asp-route-id="@item.CatId" class="btn btn-primary border-dark">Edit Category</a>
+                                <a asp-action="Delete" asp-controller="Categories" asp-route-id="@item.CatId" class="btn btn-danger border-dark">Delete Category</a>
+                                </td>
+
+                            </tr>
+                        }
+
+
+                            </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+    </div>
+</section>

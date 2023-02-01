@@ -1,0 +1,66 @@
+﻿@model IndexViewModel
+
+<div style="list-style-type:none;">
+    <ul style="list-style-type:none; ">
+        @foreach(var item in Model.Categories)
+        {
+             <li style="float:left;">
+             <a asp-action="ProductCategory" asp-controller="Home" asp-route-id="@item.CatId"  style="display:block; margin-left:20px;">@item.CatName</a>
+            </li>
+        }
+        
+    </ul>
+</div>
+
+
+<section class="home">
+    <div class="content">
+        <h1>
+            <span>Electronic Products</span>
+            <br>
+            Up To <span id="span2">50%</span> Off
+        </h1>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta, saepe.
+            <br>Lorem ipsum dolor sit amet consectetur.
+        </p>
+        <div class="btn"><button>Shop Now</button></div>
+
+    </div>
+    <div class="img">
+        <img src="~/images/background.png" alt="">
+    </div>
+</section>
+<div class="container" id="other">
+    <div class="row">
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <img src="~/images/c3.png" alt="">
+                <div class="card-img-overlay">
+                    <h3>Home Gadget</h3>
+                    <p>Latest collection Up To 50% Off</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <img src="~/images/c4.png" alt="">
+                <div class="card-img-overlay">
+                    <h3>Gaming Gadget</h3>
+                    <p>Latest collection Up To 50% Off</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+            <div class="card">
+                <img src="~/images/c5.png" alt="">
+                <div class="card-img-overlay">
+                    <h3>Electronic Gadget</h3>
+                    <p>Latest collection Up To 50% Off</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
