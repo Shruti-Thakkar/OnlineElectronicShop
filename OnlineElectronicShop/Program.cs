@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OnlineElectronicShop.Data;
 using OnlineElectronicShop.Models;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(Options =>
     Options.Password.RequireUppercase = true;
     Options.Password.RequiredLength = 5;
 
-}).AddEntityFrameworkStores<OnlineElectronicShopContext>(); 
+}).AddEntityFrameworkStores<OnlineElectronicShopContext>();
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+StripeConfiguration.ApiKey = builder.Configuration.GetValue<string>("Stripe:SecretKey");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

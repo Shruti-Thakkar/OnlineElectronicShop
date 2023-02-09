@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Options
+@inject IOptions<OnlineElectronicShop.Data.StripeSettings> Stripe 
+@model List<ShoppingCart>
+@{
+    string username = User.Identity.Name;
+    var shippingcharge = @Model.Sum(i => i.Product.ProductPrice * i.Qty / 25 % 30);
+    var hst = @Model.Sum(i => i.Product.ProductPrice *i.Qty /1 %25);
+    var total =@Model.Sum(i => i.Product.ProductPrice * i.Qty);
+    var totalamount = shippingcharge + hst + total;
+
+}
+
+
+
+
+ <form asp-action="ProceedToPay" asp-controller="Carts" method="post">
+                            <script src="https://checkout.stripe.com/checkout.js"
+                                    class="stripe-button"
+                                    data-key="@Stripe.Value.PublishableKey"
+                                    data-amount="@totalamount"
+                                    data-name="Electronics App"
+                                    data-locale="en"
+                                    data-label="Proceed To Payment @totalamount">
+                            </script>
+                        </form>

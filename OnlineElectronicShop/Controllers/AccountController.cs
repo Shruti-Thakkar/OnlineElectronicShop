@@ -28,7 +28,7 @@ namespace OnlineElectronicShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, true, true);
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");
@@ -55,12 +55,14 @@ namespace OnlineElectronicShop.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    Id = model.id,
-                    UserName = model.Email,
+                    Id = model.Id,
+                    UserName = model.Name,
                     Email = model.Email,
+                    Name= model.Name,
+
                 };
                 user.Id = Guid.NewGuid().ToString();
-                var result = await _userManager.CreateAsync(user);
+                var result = await _userManager.CreateAsync(user,model.Password);
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user,true);
@@ -72,7 +74,7 @@ namespace OnlineElectronicShop.Controllers
                 } 
              }
             
-            return View();
+            return View(model);
         }
         public async Task<IActionResult> LogOut()
         {

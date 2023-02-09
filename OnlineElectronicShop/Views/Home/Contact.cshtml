@@ -1,11 +1,11 @@
-﻿
+﻿@model Contact
 
 <div class="container" id="contact">
     <div class="row" style="margin-top: 50px;">
         <div class="col-md-4 py-3 py-md-0">
             <div class="card">
                 <i class="fas fa-phone"> Phone</i>
-                <h6>+0000000000000000000</h6>
+                <h6>+123456</h6>
             </div>
         </div>
         <div class="col-md-4 py-3 py-md-0">
@@ -21,20 +21,27 @@
             </div>
         </div>
     </div>
-    <div class="row" style="margin-top: 30px;">
+   <form method="post"  >
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="row" style="margin-top: 30px;">
         <div class="col-md-4 py-3 py-md-0">
-            <input type="text" class="form-control form-control" placeholder="Name">
+            <input asp-for="ConName"  type="text" class="form-control form-control" placeholder="Name">
+            <span class="text-danger" asp-validation-for="ConName"></span>
         </div>
         <div class="col-md-4 py-3 py-md-0">
-            <input type="text" class="form-control form-control" placeholder="Email">
+                <input asp-for="ConEmail" type="text" class="form-control form-control" placeholder="Email">
+                <span class="text-danger" asp-validation-for="ConEmail"></span>
         </div>
         <div class="col-md-4 py-3 py-md-0">
-            <input type="text" class="form-control form-control" placeholder="Phone">
+                <input asp-for="ConPhone" type="text" class="form-control form-control" placeholder="Phone">
+                <span class="text-danger" asp-validation-for="ConPhone"></span>
         </div>
         <div class="form-group" style="margin-top: 30px;">
-            <textarea class="form-control" id="" rows="5" placeholder="Message"></textarea>
+            <textarea asp-for="ConMessege" class="form-control" id="" rows="5" placeholder="Message"></textarea>
+                <span class="text-danger" asp-validation-for="ConMessege"></span>
         </div>
-        <div class="messagebtn text-center"><button>Message</button></div>
+        <div class="messagebtn text-center"><button type="submit"> Message</button></div>
     </div>
+   </form>
 </div>
 

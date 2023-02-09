@@ -1,0 +1,115 @@
+﻿@model IEnumerable<OnlineElectronicShop.Models.ShoppingCart>
+@using Microsoft.AspNetCore.Identity
+@{
+    string username = User.Identity.Name;
+    var total = @Model.Sum(i => i.Product.ProductPrice * i.Qty);
+    var hst = Math.Round(total * Convert.ToDecimal(0.13));
+    var shippingcharge = Math.Round(total * Convert.ToDecimal(.01));
+    var totalamount = shippingcharge + hst + total;
+    var totalamountpay = totalamount * 100;
+   
+
+}
+<br />
+<br />
+<h2 class="text text-center ">Congratulations" <span>@username</span> "Your payment is Successfully Completed</h2>
+<br />
+<div class="wrapper">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationUser.UserName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationUser.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ApplicationUser.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product.ProductId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product.ProductName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product.ProductDesc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Product.ProductPrice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Qty)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationUser.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductDesc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.ProductPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Qty)
+                    </td>
+                </tr>
+            }
+            <tr style="border-top: 2px solid maroon">
+
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <h3>Total Amount</h3>
+                </td>
+                <td>@totalamount</td>
+            </tr>
+
+            <tr style="border-top: 2px solid maroon">
+                <td colspan="6" style="text-align:right">
+                    <input type="button" class="btn btn-outline-primary" onclick="location.href='@Url.Action("Product","Home")'" value="Back To Shopping" />
+                    <input type="button" class="btn btn-outline-danger" onclick="window.print()" value="Proceed To Print " />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    let header = document.querySelector('h2');
+    let colors = [
+        'color: #f0f;',
+        'color: #33f;',
+        'color: #00f;',
+        'color: #0ba;',
+        'color: #33a;',
+        'color: #c33;',
+    ]
+
+    header.setAttribute(
+        'style', colors[Math.floor((Math.random() * colors.length))]);
+
+
+</script>

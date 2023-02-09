@@ -8,6 +8,8 @@
             <h3 class="text-center">Create Account</h3>
            <form asp-action="Register" asp-controller="Account" method="post">
                 <div class="input2 text-center">
+                    <input asp-for="Name" type="text" placeholder="Name">
+                    <input asp-for="UserName" type="text" placeholder="User Name">
                     <input asp-for="Email" type="email" placeholder="Email">
                     <input asp-for="Password" type="password" placeholder="Password">
                     <input asp-for="ConfirmedPassword" type="password" placeholder="ConfirmedPassword">

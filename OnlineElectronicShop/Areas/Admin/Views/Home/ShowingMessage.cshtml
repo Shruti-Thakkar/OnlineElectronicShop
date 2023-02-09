@@ -1,0 +1,51 @@
+﻿@model List<Contact>
+<section class="content">
+    <div class="container-fluid ">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Contact Table</h3>
+                    </div>
+                    <div>
+
+                        <a class="btn btn-primary" asp-controller="Home" asp-action="ShowingMessage" asp-area="Admin">
+                            Add Custemer Information
+                        </a>
+                    </div>
+
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">Message</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.ConName</td>
+                                        <td>@item.ConEmail</td>
+                                        <td>@item.ConPhone</td>
+                                        <td>@item.ConMessege</td>
+                                     </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </div>
+</section>
+
