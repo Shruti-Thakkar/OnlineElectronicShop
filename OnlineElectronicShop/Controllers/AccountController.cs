@@ -4,6 +4,7 @@ using NuGet.Protocol;
 using OnlineElectronicShop.Data;
 using OnlineElectronicShop.Models;
 using OnlineElectronicShop.ViewModel;
+using System.Security.Claims;
 
 namespace OnlineElectronicShop.Controllers
 {
@@ -11,6 +12,7 @@ namespace OnlineElectronicShop.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+       
 
         public AccountController(SignInManager<ApplicationUser> signInManager,UserManager<ApplicationUser> userManager)
         {
@@ -29,6 +31,7 @@ namespace OnlineElectronicShop.Controllers
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, true);
+                var user = await _userManager.FindByNameAsync(model.UserName);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("Index", "Home");
@@ -41,8 +44,6 @@ namespace OnlineElectronicShop.Controllers
             return View(model);
 
         }
-        
-
             [HttpGet]
         public IActionResult Register()
         {
@@ -61,7 +62,7 @@ namespace OnlineElectronicShop.Controllers
                     Name= model.Name,
 
                 };
-                user.Id = Guid.NewGuid().ToString();
+                user.Id=Guid.NewGuid().ToString();
                 var result = await _userManager.CreateAsync(user,model.Password);
                 if (result.Succeeded)
                 {
@@ -71,10 +72,10 @@ namespace OnlineElectronicShop.Controllers
                 else
                 { 
                     return View(model);
-                } 
-             }
-            
-            return View(model);
+                }
+               
+            }
+              return View(model);
         }
         public async Task<IActionResult> LogOut()
         {

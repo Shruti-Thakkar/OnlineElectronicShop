@@ -14,6 +14,7 @@ namespace OnlineElectronicShop.ViewModel
 
         [Compare ("Password")]
         public string? ConfirmedPassword { get; set; }
+        public string? Role { get; set; }   
 
 
     }
