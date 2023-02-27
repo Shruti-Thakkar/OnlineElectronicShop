@@ -1,0 +1,39 @@
+﻿@model Product
+<form asp-action="AddToWishList" asp-controller="Carts" asp-route-ProductId="@Model.ProductId" method="post">
+    <div class="container-fluid pb-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-5 mb-30">
+                <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner bg-light">
+                        <div class="carousel-item active">
+                            <img class="w-100 h-100" src="~/ProductImage/@Model.ProductImg" alt="Image">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-7 h-auto mb-30">
+                <div class="h-100 bg-light p-30">
+                    <h3>@Model.ProductName</h3>
+
+                    <h3 class="font-weight-semi-bold mb-4">@Model.ProductPrice</h3>
+                    <p class="mb-4">
+                        @Model.ProductDesc
+                    </p>
+
+                    <div class="d-flex align-items-center mb-4 pt-2">
+                        <button class="btn btn-primary px-3" value="count">
+                            <i class="fa fa-shopping-cart mr-1"></i>Add To
+                            WishList
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+

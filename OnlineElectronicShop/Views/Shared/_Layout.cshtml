@@ -57,7 +57,10 @@
             else
             {
               <a asp-action="Cart" asp-controller="Carts"><i class="fa-solid fa-cart-plus"></i></a>
+              <a asp-action="Wish" asp-controller="Carts"><i class="fa-solid fa-heart"></i></a>
+
             }
+
 
             @if (User.Identity.IsAuthenticated)
         {

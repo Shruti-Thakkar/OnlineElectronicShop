@@ -93,6 +93,7 @@ namespace OnlineElectronicShop.Controllers
             _context.SaveChanges();
             return RedirectToAction("Cart", "Carts");
         }
+     
         public async Task<IActionResult> CartSummery()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -153,6 +154,47 @@ namespace OnlineElectronicShop.Controllers
 
             return View(result);
         }
+        public async Task<IActionResult> Wish()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var result = _context.WishLists.Include(p => p.Product).Where(u => u.UserId == user.Id).ToList();
+
+            return View(result);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddToWishList(WishList model)
+        {
+            var product = _context.Products.FirstOrDefault(p => p.ProductId == model.ProductId);
+            var user = await _userManager.GetUserAsync(User);
+            var cart = new WishList
+            {
+                UserId = user.Id,
+                ProductId = product.ProductId,
+            };
+            var shopcart = _context.WishLists.FirstOrDefault(p => p.UserId == user.Id && p.ProductId == model.ProductId);
+            if (shopcart == null)
+            {
+                _context.WishLists.Add(cart);
+
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public async Task<IActionResult> RemoveWishList(int id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var shopcart = _context.WishLists.FirstOrDefault(u => u.UserId == user.Id && u.ProductId == id);
+            if (shopcart != null)
+            {
+                _context.WishLists.Remove(shopcart);
+
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Wish", "Carts");
+        }
+
+
 
 
     }

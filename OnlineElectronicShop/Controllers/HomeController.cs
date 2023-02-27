@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MailKit.Net.Smtp;
+using MimeKit;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol;
 using OnlineElectronicShop.Data;
 using OnlineElectronicShop.Models;
 using OnlineElectronicShop.ViewModel;
 using System.Diagnostics;
+using System.Net.Mail;
 
 namespace OnlineElectronicShop.Controllers
 {
@@ -55,6 +58,13 @@ namespace OnlineElectronicShop.Controllers
             
             return View(product);
         }
+        public IActionResult WishDetails(int? id)
+        {
+            var product = _context.Products.Include(c => c.Category).FirstOrDefault(p => p.ProductId == id);
+
+            return View(product);
+        }
+
         public IActionResult About()
         {
             return View();
@@ -69,9 +79,26 @@ namespace OnlineElectronicShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(model);
-                _context.SaveChanges();
-                return RedirectToAction("Index");
+
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com");
+                    client.Authenticate("srt1625@gmail.com", "rkrreowbawzcjzfo");
+                    var bodyBuilder = new BodyBuilder()
+                    {
+                        HtmlBody = $"<p>{model.ConName}</p> <p>{model.ConEmail}</p> <p>{model.ConPhone}</p> <p>{model.ConMessege}</p>",
+                        TextBody = "{model.ConName} \r\n {model.ConEmail} \r\n {model.ConPhone} \r\n {model.ConMessege}"
+                    }; var message = new MimeMessage
+                    {
+                        Body = bodyBuilder.ToMessageBody(),
+                    };
+                    message.From.Add(new MailboxAddress(model.ConName, model.ConEmail));
+                    message.To.Add(new MailboxAddress("Testing", "srt1625@gmail.com"));
+                    message.Subject = model.ConMessege;
+                    client.Send(message); client.Disconnect(true);
+                }
+                TempData["Message"] = "Thank you for your inquiry, We will contact you shortly";
+                return RedirectToAction(nameof(Contact));
 
             }
             return View(model);

@@ -12,7 +12,13 @@
                         <h3 class="text-center">@item.ProductName</h3>
                         <p class="text-center">@item.ProductDesc</p>
                         <h2>$@item.ProductPrice <span>
-                                <a href="/Home/ProductDetails/@item.ProductId"><i class="fa-solid fa-cart-shopping"></i></a>
+                                <a href="/Home/ProductDetails/@item.ProductId">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                </a>
+                                <a href="/Home/WishDetails/@item.ProductId">
+                                    <i class="fa-solid fa-heart"></i>
+                                </a>
+
                             </span>
                         </h2>
                     </div>
