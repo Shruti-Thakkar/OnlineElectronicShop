@@ -1,4 +1,13 @@
 ﻿@model Contact
+@{
+    var massage = TempData["Message"] as string;
+}
+@if (!string.IsNullOrEmpty(massage))
+{
+    <div class="alert alert-primary">
+        @massage
+    </div>
+}
 
 <div class="container" id="contact">
     <div class="row" style="margin-top: 50px;">
