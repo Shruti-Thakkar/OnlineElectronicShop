@@ -47,8 +47,12 @@
         <p>WELCOME TO OUR SHOP</p>
         <p class="text text-black-50">@username</p>
 
-        
-          <div class="icons">
+       
+          <div class="d-xl-inline-flex icons">
+            @{
+                await Html.RenderPartialAsync("_Sharebutton", ViewData["Title"]);
+            }
+
               @if(!User.Identity.IsAuthenticated)
                 {
                 <a asp-action="Login" asp-controller="Account"><i class="fa-solid fa-cart-plus"></i></a>
@@ -74,6 +78,7 @@
         }
         </div>
         
+       
     </div>
     <!-- top navbar -->
     <!-- navbar -->
@@ -97,7 +102,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/Home/Contact">Contact</a>
                     </li>
+                   
                 </ul>
+
                 <form asp-action="Search" class="d-flex" id="search" method="post">
                     <input class="form-control me-2" type="search" placeholder="Search" name="productName" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>

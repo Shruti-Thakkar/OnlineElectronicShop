@@ -82,7 +82,7 @@ namespace OnlineElectronicShop.Controllers
                using (var client  = new SmtpClient())
                 {
                     client.Connect("smtp.gmail.com");
-                    client.Authenticate("srt1625@gmail.com", "qeooxvjpbvlujpoj");
+                    client.Authenticate("srt1625@gmail.com", "pweyenqqxljeuevx");
                     var bodyBuilder = new BodyBuilder()
                     {
                         HtmlBody = $"<p>{model.ConName}</p> <p>{model.ConEmail}</p> <p>{model.ConPhone}</p> <p>{model.ConMessege}</p>",
@@ -93,9 +93,11 @@ namespace OnlineElectronicShop.Controllers
                         Body = bodyBuilder.ToMessageBody(),
                     };
                     message.From.Add(new MailboxAddress("Do Not Reply", model.ConEmail));
-                    message.To.Add(new MailboxAddress("Testing", "srt1625@gmail.com"));
+                    message.To.Add(new MailboxAddress("Testing","srt1625@gmail.com"));
                     message.Subject = model.ConMessege;
-                    client.Send(message); client.Disconnect(true);
+                    client.Send(message); 
+                    client.Disconnect(true);
+
                 }
                 TempData["Message"] = "Thank you for your Inquiry, We will contact you shortly";
                 return RedirectToAction(nameof(Contact));
