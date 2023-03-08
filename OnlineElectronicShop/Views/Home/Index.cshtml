@@ -1,4 +1,13 @@
 ﻿@model IndexViewModel
+@{
+    Pager pager = new Pager();
+    int pageNo = 0;
+    if (ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPages;
+    }
+}
 
 <div style="list-style-type:none;">
     <ul style="list-style-type:none; ">
@@ -65,4 +74,4 @@
     </div>
 </div>
 
-    
+   <partial name="_Pager" model="@pager" />

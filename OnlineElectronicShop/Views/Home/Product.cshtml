@@ -1,4 +1,13 @@
 ﻿@model List<Product>
+@{
+    Pager pager = new Pager();
+    int pageNo = 0;
+    if(ViewBag.Pager!= null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPages;
+    }
+}
     <div class="container" id="product-cards">
     <h1 class="text-center">PRODUCTS</h1>
                  
@@ -30,6 +39,7 @@
         </div> 
 
 </div>
+<partial name="_Pager" model="@pager" />
 
 
 

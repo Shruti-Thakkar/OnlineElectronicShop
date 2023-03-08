@@ -31,10 +31,20 @@ namespace OnlineElectronicShop.Controllers
             };
             return View(model);
         }
-        public IActionResult Product()
+        public IActionResult Product(int pg=1)
         {
             var products = _context.Products.ToList();
-            return View(products);
+            const int pageSize = 3;
+            if(pg < 1)
+            {
+                pg = 1;
+            }
+            int recsCount = products.Count();
+            var pager = new Pager(recsCount,pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+             var data = products.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager=pager;
+            return View(data);
         }
         public IActionResult ProductCategory ( int id)
         {
